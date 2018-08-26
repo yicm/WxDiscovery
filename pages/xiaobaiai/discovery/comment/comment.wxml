@@ -1,0 +1,61 @@
+<!--pages/xiaobaiai/discovery/comment/comment.wxml-->
+<view class="discovery_list_box">
+  <view>
+    <view class="discovery_list">
+      <!-- 头像 -->
+      <button class="avatar_button" bindgetuserinfo='avatarClicked' open-type="getUserInfo" lang="zh_CN" data-user_id='{{user_id}}'>
+        <view class="discovery_avatar">
+          <image src="{{avatarUrl}}" />
+        </view>
+      </button>
+      <!-- 内容 -->
+      <view class="discovery_content_box" bindlongpress='discoveryLongTap' data-discovery_id='{{discovery_id}}' data-user_id='{{user_id}}'>
+        <!-- 昵称和时间 -->
+        <view>
+          <view class="discovery_meta">
+            <view class="discovery_nickname">
+              <text>{{nickname}}</text>
+              <view class="commnet_date">
+                <text>{{time}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 发现图片内容 -->
+        <!-- 发现文字内容 -->
+        <view class="discovery_content">{{content}}</view>
+        <!-- 点赞和评论及关注 -->
+        <view class="discovery_zan_comment_box">
+          <block wx:if='{{zanCurrent}}'>
+            <view class="discovery_zan_comment" bindtap='zandiscoveryClick' data-discovery_id='{{discovery_id}}' data-user_id='{{user_id}}' data-zan_id='{{zanId}}'>
+              <image src="/images/zan_self.png"></image>
+              <text class="discovery_zan_comment_num" wx:if="{{zanNum > 0}}">{{zanNum}}</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="discovery_zan_comment" bindtap='zandiscoveryClick' data-discovery_id='{{discovery_id}}' data-user_id='{{user_id}}' data-zan_id='{{zanId}}'>
+              <image src="/images/zan.png"></image>
+              <text class="discovery_zan_comment_num" wx:if="{{zanNum > 0}}">{{zanNum}}</text>
+            </view>
+          </block>
+          <!-- 关注成为粉丝 -->
+          <view class="">
+            <button class="follow_button" bindgetuserinfo='followClicked' open-type="getUserInfo" lang="zh_CN" data-user_id='{{user_id}}'>
+              <view class="discovery_zan_comment discovery_follow">
+                <image src="/images/follow.png"></image>
+                <text class="discovery_zan_comment_num" wx:if="{{followNum > 0}}">{{followNum}}</text>
+              </view>
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- WxComment -->
+<view class="WxComment">
+  <WxComment tipOne="Markdown " tipTwo="will be supported, Powered by yicm." submitBtnText="评论" articleID="{{discovery_id}}" articleTitle="[发现] {{content}}" articleURL="/pages/xiaobaiai/discovery/comment/comment?discovery_id={{discovery_id}}&avatarUrl={{avatarUrl}}&time={{time}}&nickname={{nickname}}&content={{content}}&user_id={{user_id}}" contentLen='1'></WxComment>
+</view>
+<view style="width: 100%;height: 50rpx;">
+</view>

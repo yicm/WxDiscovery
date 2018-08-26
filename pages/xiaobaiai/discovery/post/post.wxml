@@ -1,0 +1,22 @@
+<!--pages/xiaobaiai/discovery/post/post.wxml-->
+<form bindsubmit="bindPostFormSubmit">
+  <view class="post_box">
+    <!-- post content -->
+    <view class="post_content_box">
+      <view class="post_content_textarea">
+        <textarea class="textarea" placeholder="{{placeholder}}" value="{{textarea_value}}" name="textarea" maxlength='{{textarea_max_len}}' ></textarea>
+      </view>
+      <!-- image or emoji
+      <view>
+      </view>
+      -->
+    </view>
+    <!-- post button -->
+    <view class="{{show_aur_button?'hide':'show'}}">
+      <button class="post_button_box" formType="submit" type="primary" size="default" disabled='{{submit_btn_disabled}}'>发布</button>
+    </view>
+    <view class="{{show_aur_button?'show':'hide'}}">
+      <button class="post_button_box" type="primary" plain="false" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGetUserInfo">授权</button>
+    </view>
+  </view>
+</form>

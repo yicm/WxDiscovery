@@ -1,0 +1,36 @@
+/* pages/xiaobaiai/discovery/post/post.wxss */
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.post_box {
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post_content_box {
+  display: flex;
+  width: 100%;
+}
+
+.post_content_textarea {
+  width: 100%;
+  background-color: #F9FEF8;
+}
+
+.textarea {
+  width: 100%;
+}
+
+.post_button_box {
+  width: 200rpx;
+  margin-top: 20rpx;
+  text-align: center;
+  vertical-align: middle;
+}

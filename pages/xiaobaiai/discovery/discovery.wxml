@@ -1,0 +1,69 @@
+<scroll-view scroll-y="true" style="height: {{windowHeight}}px;" bindscrolltolower="onReachBottom" enable-back-to-top="true" bindscroll="scroll" scroll-top="{{scroll_top}}">
+  <block wx:if="{{tabbar_show}}">
+    <!-- 点击+发布 -->
+    <view class="post_click" bindtap="onPostClick"></view>
+  </block>
+  <!-- 显示评论列表 -->
+  <view class="discovery_list_box">
+    <view wx:if="{{leancloud_discovery_data.length > 0 && tabbar_show}}">
+      <view class="discovery_list" wx:for="{{leancloud_discovery_data}}" wx:key="{{item.id}}">
+        <!-- 头像 -->
+        <button class="avatar_button" bindgetuserinfo='avatarClicked' open-type="getUserInfo" lang="zh_CN" data-user_id='{{item.userId}}'>
+          <view class="discovery_avatar">
+            <image src="{{item.avatarUrl}}" />
+          </view>
+        </button>
+        <!-- 内容 -->
+        <view class="discovery_content_box" bindlongpress='discoveryLongTap' data-discovery_id='{{item.id}}' data-user_id='{{item.userId}}'>
+          <!-- 昵称和时间 -->
+          <view>
+            <view class="discovery_meta">
+              <view class="discovery_nickname">
+                <text>{{item.nickName}}</text>
+                <view class="commnet_date">
+                  <text>{{item.time}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <!-- 发现图片内容 -->
+          <!-- 发现文字内容 -->
+          <view class="discovery_content" bindtap='textContentClick' bindlongpress='textContentLongPress' data-discovery_id='{{item.id}}' data-zan_id='{{item.zanId}}'>{{item.content}}</view>
+          <!-- 点赞和评论及关注 -->
+          <view class="discovery_zan_comment_box">
+            <block wx:if='{{item.zanCurrent}}'>
+              <view class="discovery_zan_comment" bindtap='zandiscoveryClick' data-discovery_id='{{item.id}}' data-user_id='{{item.userId}}' data-zan_id='{{item.zanId}}'>
+                <image src="/images/zan_self.png"></image>
+                <text class="discovery_zan_comment_num" wx:if="{{item.zanNum > 0}}">{{item.zanNum}}</text>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="discovery_zan_comment" bindtap='zandiscoveryClick' data-discovery_id='{{item.id}}' data-user_id='{{item.userId}}' data-zan_id='{{item.zanId}}'>
+                <image src="/images/zan.png"></image>
+                <text class="discovery_zan_comment_num" wx:if="{{item.zanNum > 0}}">{{item.zanNum}}</text>
+              </view>
+            </block>
+            <view class="discovery_zan_comment" bindtap='commentReplyClicked' data-discovery_id='{{item.id}}' data-nickname='{{item.nickName}}' data-avatarUrl='{{item.avatarUrl}}' data-time='{{item.time}}' data-content='{{item.content}}' data-user_id='{{item.userId}}'>
+              <image src="/images/comment_reply.png"></image>
+              <text class="discovery_zan_comment_num" wx:if="{{item.commentNum > 0}}">{{item.commentNum}}</text>
+            </view>
+            <!-- 关注成为粉丝 -->
+            <view class="">
+              <button class="follow_button" bindgetuserinfo='followClicked' open-type="getUserInfo" lang="zh_CN" data-user_id='{{item.userId}}'>
+                <view class="discovery_zan_comment discovery_follow">
+                  <image src="/images/follow.png"></image>
+                  <text class="discovery_zan_comment_num" wx:if="{{item.followNum > 0}}">{{item.followNum}}</text>
+                </view>
+              </button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="no_discovery">
+        <text>还没有内容哦😉</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
